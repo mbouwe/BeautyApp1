@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "109213424634",
+    "project_id": "standardbeauty-4c480",
+    "storage_bucket": "standardbeauty-4c480.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109213424634:android:c764ac95918ee379abe243",
+        "android_client_info": {
+          "package_name": "com.wecreate.beautyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109213424634-pfiv85lv0p6b2v0fuu8ieto96rhdtfgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSBs411rCEkGAQIMlcTOD-HByNbMi6o8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109213424634-pfiv85lv0p6b2v0fuu8ieto96rhdtfgk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "109213424634-4rtaevn1rvrfej8e7o3bn3g0q4a69nf6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wecreate.beautyapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
