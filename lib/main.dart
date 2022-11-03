@@ -24,9 +24,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-
-
-
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (contect) => GoogleSignInProvider(),
@@ -89,26 +86,53 @@ class _SplashscreenState extends State<Splashscreen>
         ),
       ),
       backgroundColor: KBackgroundColor,
-      nextScreen: _isloggedIn ? HomePage() : LoginScreen(),
+      nextScreen:_CheckauthState(),
       splashIconSize: 550,
       duration: 4000,
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.leftToRightWithFade,
     );
   }
-  bool _isloggedIn = false;
+
+}
+
+class _CheckauthState extends StatefulWidget {
+  const _CheckauthState({Key? key}) : super(key: key);
+
+  @override
+  State<_CheckauthState> createState() => _CheckauthStateState();
+}
+
+class _CheckauthStateState extends State<_CheckauthState> {
+  bool isAuth = false;
   @override
   void initState() {
     _checkIfLoggedIn();
     super.initState();
   }
-  void _checkIfLoggedIn () async {
-    SharedPreferences localsStorage = await SharedPreferences.getInstance();
-    var token = localsStorage.getString('token');
-    if(token!=null){
-      _isloggedIn=true;
+
+  void _checkIfLoggedIn() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if(token != null){
+      setState(() {
+        isAuth = true;
+      });
     }
   }
-}
 
+  Widget build(BuildContext context) {
+    Widget child;
+
+    if(isAuth){
+      child =HomePage();
+    }else{
+      child = LoginScreen();
+    }
+
+    return Scaffold(
+      body: child,
+    );
+  }
+}
 

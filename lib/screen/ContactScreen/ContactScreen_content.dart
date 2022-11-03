@@ -1,5 +1,5 @@
 import 'package:animated_background/animated_background.dart';
-import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
+//import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:beautyapp/screen/Navigator/Drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class _contactState extends State<contact> with TickerProviderStateMixin {
         ),
         vsync: this,
         child: ListView(
-          padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+          padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
           children: [
             Container(
               height: 700,
@@ -119,106 +119,259 @@ class _contactState extends State<contact> with TickerProviderStateMixin {
                       ),
                     ),
 
-                    const SizedBox(
+                    const Divider(
                       height: 10,
+                      color: KPrimaryColor,
+                      thickness: 2,
                     ),
-                    // User card
+                    Text(
+                      'Contact',
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(2),
+                      child: Container(
+                        height: 160,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      child: const Icon(
+                                        Icons.email,
+                                        size: 28,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'Email',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text('info@standard-beauty.co.za',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: KPrimaryColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.only(right: 5.0, left: 25),
+                                  child: IconButton(
+                                    onPressed: _launchUrl2,
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: KPrimaryColor,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Divider(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      child: const Icon(
+                                        Icons.phone,
+                                        size: 28,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'Phone Number',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text('+27 (63) 587-2734',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: KPrimaryColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.only(right: 5.0, left: 80),
+                                  child: IconButton(
+                                    onPressed: _launchUrl3,
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: KPrimaryColor,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Social Network',
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(2),
+                      child: Container(
+                        height: 160,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      child: const Icon(
+                                        FontAwesomeIcons.instagram,
+                                        size: 28,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'Instagram',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text(
+                                        'https://instagram.com/standard_beauty',
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            color: KPrimaryColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.only(right: 5.0, left: 25),
+                                  child: IconButton(
+                                    onPressed: _launchUrl,
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: KPrimaryColor,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Divider(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      child: const Icon(
+                                        FontAwesomeIcons.globe,
+                                        size: 28,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'WebSite',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text('https://standard-beauty.co.za/',
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: KPrimaryColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.only( left: 80),
+                                  child: IconButton(
+                                    onPressed: _launchUrl1,
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: KPrimaryColor,
+                                    ),
+                                    alignment: AlignmentDirectional.centerEnd,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
 
-                    SettingsGroup(
-                      settingsGroupTitle: "Contact",
-                      settingsGroupTitleStyle: const TextStyle(
-                          color: KPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                      items: [
-                        SettingsItem(
-                          onTap: () {
-                            _launchUrl2();
-                          },
-                          icons: Icons.email,
-                          iconStyle: IconStyle(
-                            backgroundColor: Colors.pinkAccent,
-                          ),
-                          title: 'Email',
-                          subtitle: "info@standard-beauty.co.za",
-                          titleStyle: TextStyle(
-                            color: Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          subtitleStyle: TextStyle(
-                            color: KPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SettingsItem(
-                          onTap: () {
-                            _launchUrl3();
-                          },
-                          icons: Icons.phone,
-                          iconStyle: IconStyle(
-                            iconsColor: Colors.white,
-                            backgroundColor: Colors.pinkAccent,
-                          ),
-                          title: 'Phone Number',
-                          subtitle: "+27 (63) 587-2734",
-                          titleStyle: TextStyle(
-                            color: Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          subtitleStyle: TextStyle(
-                            color: KPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // You can add a settings title
-                    SettingsGroup(
-                      settingsGroupTitle: "Social Network",
-                      settingsGroupTitleStyle: TextStyle(
-                          color: KPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                      items: [
-                        SettingsItem(
-                          onTap: () {
-                            _launchUrl();
-                          },
-                          icons: FontAwesomeIcons.instagram,
-                          iconStyle:
-                              IconStyle(backgroundColor: Colors.pinkAccent),
-                          title: "Instagram",
-                          subtitle: 'https://instagram.com/standard_beauty',
-                          titleStyle: const TextStyle(
-                            color: Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          subtitleStyle: const TextStyle(
-                            color: KPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SettingsItem(
-                          onTap: () {
-                            _launchUrl1();
-                          },
-                          icons: FontAwesomeIcons.globe,
-                          iconStyle:
-                              IconStyle(backgroundColor: Colors.pinkAccent),
-                          title: "WebSite",
-                          subtitle: 'https://standard-beauty.co.za/',
-                          titleStyle: const TextStyle(
-                            color: Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          subtitleStyle: const TextStyle(
-                            color: KPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),

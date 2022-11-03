@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import '../../utils/constant.dart';
 import '../login/LoginScreen.dart';
 
@@ -19,45 +20,55 @@ class ForgotContent extends StatefulWidget {
 }
 
 class _ForgotContentState extends State<ForgotContent> with TickerProviderStateMixin {
-  Widget inputField(String hint, IconData iconData){
+  Widget inputField(String hint, IconData iconData) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 4),
       child: SizedBox(
-        height: 50,
+        height: 80,
         child: Material(
           elevation: 8,
           shadowColor: Colors.black87,
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(30),
-          child: TextField(
-            textAlignVertical: TextAlignVertical.bottom,
+          borderRadius: BorderRadius.circular(40),
+          child: TextFormField(
+            autovalidateMode: AutovalidateMode.always,
+            textAlignVertical: TextAlignVertical.center,
+            textAlign: TextAlign.start ,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(40),
               ),
               filled: true,
               fillColor: Colors.white,
               hintText: hint,
               prefixIcon: Icon(iconData),
             ),
+            validator: MultiValidator([
+              RequiredValidator(errorText: 'Required'),
+              EmailValidator(errorText: 'enter a your valid email'),
+            ]),
           ),
         ),
-
       ),
-
     );
-
   }
+
 
   Widget loginButton(String title){
     return Padding(padding: const EdgeInsets.symmetric(horizontal: 135,vertical: 16),
       child: ElevatedButton(
-        onPressed: (){},
+        onPressed: (){
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text(
+                  'your are received the link for restore your password',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                )),
+          );
+        },
         style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 14),
+            padding: const EdgeInsets.symmetric(vertical: 14), backgroundColor: KSecondaryColor,
             shape: const StadiumBorder(),
-            primary: KSecondaryColor,
             elevation: 8,
             shadowColor: Colors.black87
         ),
@@ -150,7 +161,7 @@ class _ForgotContentState extends State<ForgotContent> with TickerProviderStateM
           particleCount: 68,
           spawnMaxSpeed: 50,
           minOpacity: 0.1,
-          baseColor: Colors.pinkAccent,
+          baseColor: Colors.white38,
 
         ),
       ),
@@ -161,11 +172,12 @@ class _ForgotContentState extends State<ForgotContent> with TickerProviderStateM
             top: 30,
             left: 0,
             child: IconButton (
-              icon: const Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios),
               onPressed: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                   return const LoginScreen();
                 }));
+
               },
               color: KPrimaryColor,
 
@@ -217,6 +229,7 @@ class _ForgotContentState extends State<ForgotContent> with TickerProviderStateM
                     children:  [
 
                       Forgotpassword(),
+                      SizedBox(height: 10,),
                       inputField('Email',Icons.mail_outline),
                       loginButton('Send'),
 

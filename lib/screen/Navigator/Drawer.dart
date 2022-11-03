@@ -1,8 +1,17 @@
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
 
-import 'package:beautyapp/api/api.dart';
+
+import 'package:beautyapp/screen/Blog/Blog_Screen.dart';
+import 'package:beautyapp/screen/Logprogress/Logprogress.dart';
+import 'package:beautyapp/screen/Skine/SkineScreen.dart';
+import 'package:beautyapp/screen/challenges/challenge_screen.dart';
 import 'package:beautyapp/screen/edit%20profile/edit_profile.dart';
+import 'package:beautyapp/screen/goals/goals_Screen.dart';
+import 'package:beautyapp/screen/joinChallenge/joinchallenge.dart';
+import 'package:beautyapp/screen/whachvideo/VideoScreen.dart';
+import 'package:circular_image/circular_image.dart';
 import 'package:flutter/material.dart';
 import 'package:multilevel_drawer/multilevel_drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,61 +28,59 @@ class MultiDrawer extends StatefulWidget {
 }
 
 class _MultiDrawerState extends State<MultiDrawer> {
-  var userData;
+  var UserData ,data,taille;
+  String? name,surname,image;
+  int? long1=0;
 
   void initState() {
-    _getUserInfo();
+    _getData();
     super.initState();
   }
 
-  void _getUserInfo() async{
-    SharedPreferences localsStorage = await SharedPreferences.getInstance();
-    var userJson = localsStorage.getString('user');
-    var user = json.decode(userJson!);
+  void _getData() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var userjson = localStorage.getString('contact')!;
+    var contact = json.decode(userjson);
     setState(() {
-      userData= user;
+      UserData = contact;
     });
+    return UserData;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return MultiLevelDrawer(
       subMenuBackgroundColor: KBackgroundColor,
       backgroundColor: KBackgroundColor,
       rippleColor: Colors.green,
       divisionColor: Colors.blueGrey,
+
       header: SizedBox(
-        height: size.height * 0.20,
+        height: size.height * 0.25,
+
         child: Center(
+
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                Icon(Icons.person),
-                SizedBox(
-                  height: 5,
-                ),
+              children:  <Widget>[
+                Center(child: CircularImage(source: 'http://standard-beauty.afrixcel.co.za/storage/app/customer/images/${UserData?[0]!['picture']}'??'',radius:40,borderWidth:3,borderColor:Colors.pink)),
                 Padding(
-                  padding: EdgeInsets.only(top: 25),
-                  child: Text(
-                    'firstname',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                  padding: EdgeInsets.only(top: 5),
+                  child: Text(UserData?[0]!['firstname']! ?? '',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: KPrimaryColor),),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  'surname',
-                  style: TextStyle(
-                    color: Colors.white,
+                  UserData?[0]!['surname']!?? '',
+                  style: const TextStyle(
+                    color: KPrimaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -95,8 +102,14 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-          trailing: const Icon(Icons.arrow_right,color: Colors.pink,),
-          leading: const Icon(Icons.person,color: Colors.pink,),
+          trailing: const Icon(
+            Icons.arrow_right,
+            color: Colors.pink,
+          ),
+          leading: const Icon(
+            Icons.person,
+            color: Colors.pink,
+          ),
           onClick: () {},
           subMenuItems: [
             MLSubmenu(
@@ -110,7 +123,8 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return const Wishlist();
                 }));
               },
@@ -126,8 +140,9 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                  return const ContactScreen();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return ContactScreen();
                 }));
               },
             ),
@@ -142,8 +157,9 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                  return const edit_Profile();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return edit_profil();
                 }));
               },
             ),
@@ -158,7 +174,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return SkineScreen();
+                }));
               },
             ),
             MLSubmenu(
@@ -172,7 +191,7 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+
               },
             ),
             MLSubmenu(
@@ -191,7 +210,7 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             MLSubmenu(
               submenuContent: const Text(
-                'Challenges',
+                'My Challenges',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -200,7 +219,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const joinChallenge();
+                }));
               },
             ),
           ],
@@ -215,13 +237,19 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-          trailing: const Icon(Icons.arrow_right,color: Colors.pink,),
-          leading: const Icon(Icons.home,color: Colors.pink,),
+          trailing: const Icon(
+            Icons.arrow_right,
+            color: Colors.pink,
+          ),
+          leading: const Icon(
+            Icons.home,
+            color: Colors.pink,
+          ),
           onClick: () {},
           subMenuItems: [
             MLSubmenu(
               submenuContent: const Text(
-                'Join Challenges',
+                'All Challenges',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -230,7 +258,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const ChallengeScreen();
+                }));
               },
             ),
             MLSubmenu(
@@ -244,23 +275,13 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return LogProgress();
+                }));
               },
             ),
-            MLSubmenu(
-              submenuContent: const Text(
-                'Latest\n Communication',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onClick: () {
-                Navigator.pop(context);
-              },
-            ),
+
             MLSubmenu(
               submenuContent: const Text(
                 'Watch Video',
@@ -272,7 +293,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return VideoScreen();
+                }));
               },
             ),
           ],
@@ -287,38 +311,18 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-          trailing: const Icon(Icons.arrow_right,color: Colors.pink,),
-          leading: const Icon(Icons.star,color: Colors.pink,),
-          onClick: () {},
+          trailing: const Icon(
+            Icons.arrow_right,
+            color: Colors.pink,
+          ),
+          leading: const Icon(
+            Icons.star,
+            color: Colors.pink,
+          ),
+          onClick: () {
+
+          },
           subMenuItems: [
-            MLSubmenu(
-              submenuContent: const Text(
-                'Get\n Recommendations',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onClick: () {
-                Navigator.pop(context);
-              },
-            ),
-            MLSubmenu(
-              submenuContent: const Text(
-                'Scan Products',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onClick: () {
-                Navigator.pop(context);
-              },
-            ),
             MLSubmenu(
               submenuContent: const Text(
                 'Routine',
@@ -330,7 +334,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return Goals_Screen();
+                }));
               },
             ),
             MLSubmenu(
@@ -359,8 +366,14 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-          trailing: const Icon(Icons.arrow_right,color: Colors.pink,),
-          leading: const Icon(Icons.shop,color: Colors.pink,),
+          trailing: const Icon(
+            Icons.arrow_right,
+            color: Colors.pink,
+          ),
+          leading: const Icon(
+            Icons.shop,
+            color: Colors.pink,
+          ),
           onClick: () {},
           subMenuItems: [
             MLSubmenu(
@@ -417,24 +430,16 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-          trailing: const Icon(Icons.arrow_right,color: Colors.pink,),
-          leading: const Icon(Icons.home,color: Colors.pink,),
+          trailing: const Icon(
+            Icons.arrow_right,
+            color: Colors.pink,
+          ),
+          leading: const Icon(
+            Icons.home,
+            color: Colors.pink,
+          ),
           onClick: () {},
           subMenuItems: [
-            MLSubmenu(
-              submenuContent: const Text(
-                'Featured',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onClick: () {
-                Navigator.pop(context);
-              },
-            ),
             MLSubmenu(
               submenuContent: const Text(
                 'Blog Post',
@@ -446,7 +451,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const Blog_Screen();
+                }));
               },
             ),
             MLSubmenu(
@@ -460,7 +468,10 @@ class _MultiDrawerState extends State<MultiDrawer> {
                 textAlign: TextAlign.center,
               ),
               onClick: () {
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const Blog_Screen();
+                }));
               },
             ),
           ],
@@ -475,29 +486,29 @@ class _MultiDrawerState extends State<MultiDrawer> {
             ),
             textAlign: TextAlign.center,
           ),
-
-          leading: const Icon(Icons.logout,color: Colors.pink,),
+          leading: const Icon(
+            Icons.logout,
+            color: Colors.pink,
+          ),
           onClick: () {
-            _logout();
-
+            print(UserData[0]['firstname']);
           },
-
         ),
-
       ],
-
     );
   }
-  void _logout()async{
-    var res = await CallApi().getData('logout');
-    var body = jsonDecode(res.body);
-    if(body['success']){
-      SharedPreferences localsStorage = await SharedPreferences.getInstance();
-      localsStorage.remove('user');
-      localsStorage.remove('token');
-      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-        return const LoginScreen();
-      }));
-    }
+
+  void logout() async {
+
+      SharedPreferences localstorage = await SharedPreferences.getInstance();
+      localstorage.remove('token');
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return const LoginScreen();
+          },
+        ),
+      );
+
   }
 }

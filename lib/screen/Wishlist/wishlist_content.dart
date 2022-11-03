@@ -1,3 +1,4 @@
+import 'package:beautyapp/screen/home/home.dart';
 import 'package:beautyapp/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_background/animated_background.dart';
@@ -27,6 +28,11 @@ class _Wishlist_contentState extends State<Wishlist_content> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(onPressed: () { Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return HomePage();
+                }));  }, icon: Icon(Icons.arrow_back_ios,color: Colors.pink,),),
         actions: [
           Padding(
             
@@ -41,7 +47,6 @@ class _Wishlist_contentState extends State<Wishlist_content> {
           )
         ],
       ),
-      drawer: const MultiDrawer(),
       body: const wishlist(),
     );
   }
